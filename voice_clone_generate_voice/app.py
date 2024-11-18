@@ -7,19 +7,13 @@ from tts_generation import show_tts_generation_page
 def login():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    login_button = st.button("Login")
-
-    if login_button:
+    if st.button("Login"):
         if username == "leena" and password == "clone@20127":
             st.session_state.logged_in = True
             st.session_state.username = username
             st.success("Login successful!")
         else:
             st.error("Invalid username or password.")
-    
-    # Check if session state is set before rendering
-    if "logged_in" in st.session_state and st.session_state.logged_in:
-        st.experimental_rerun()  # Force a rerun to reflect the change in session state
 
 # Function to handle logout
 def logout():
