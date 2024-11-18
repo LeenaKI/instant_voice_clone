@@ -9,7 +9,7 @@ API_KEY = "sk_54bb120d056452299fd2f6aa61cb6cdd5a115d8e16a02485"  # Add your Elev
 AUDIO_DIR = "./audio_files"
 os.makedirs(AUDIO_DIR, exist_ok=True)
 stability = 0.1
-similarity_boost = 0.9
+similarity_boost = 1.0
 
 # List of default voices to hide
 default_voices_to_hide = [
