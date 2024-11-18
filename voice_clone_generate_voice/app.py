@@ -1,35 +1,57 @@
 import streamlit as st
-from voice_training import show_voice_training_page
-from voice_cloning import show_voice_cloning_page
-from tts_generation import show_tts_generation_page
 
-# Function to handle login
-def login():
+# Dummy credentials for demonstration
+USERNAME = "apprikart"
+PASSWORD = "123"
+
+# Initialize session states for authentication
+if "authenticated" not in st.session_state:
+    st.session_state["authenticated"] = False
+if "active_page" not in st.session_state:
+    st.session_state["active_page"] = "Login"
+
+# Function to display the login page
+def show_login_page():
+    st.title("Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if username == "Leena" and password == "clone@20127":
-            st.session_state.logged_in = True
-            st.session_state.username = username
+        if username == USERNAME and password == PASSWORD:
+            st.session_state["authenticated"] = True
+            st.session_state["active_page"] = "Main"
             st.success("Login successful!")
+            st.experimental_rerun()
         else:
-            st.error("Invalid username or password.")
+            st.error("Invalid username or password")
 
-# Function to handle logout
-def logout():
-    st.session_state.logged_in = False
-    st.session_state.username = ""
-    st.success("Logged out successfully!")
+# Function to display the logout button
+def show_logout_button():
+    if st.sidebar.button("Logout"):
+        st.session_state["authenticated"] = False
+        st.session_state["active_page"] = "Login"
+        st.experimental_rerun()
 
-# Check if the user is logged in
-if "logged_in" not in st.session_state or not st.session_state.logged_in:
-    st.title("Login Page")
-    login()
+# Import pages (dummy functions for demonstration)
+def show_voice_training_page():
+    st.title("Voice Training Page")
+    st.write("Content for Voice Training goes here.")
+
+def show_voice_cloning_page():
+    st.title("Voice Cloning Page")
+    st.write("Content for Voice Cloning goes here.")
+
+def show_tts_generation_page():
+    st.title("TTS Generation Page")
+    st.write("Content for TTS Generation goes here.")
+
+# Route based on authentication state
+if not st.session_state["authenticated"]:
+    show_login_page()
 else:
-    # If the user is logged in, show the app
-    st.title(f"Welcome {st.session_state.username}")
+    # Sidebar navigation
     st.sidebar.title("Voice Changer App")
-    page = st.sidebar.radio("Choose a page", ["Voice Training", "Voice Cloning", "TTS Generation", "Logout"])
+    show_logout_button()  # Add logout button to the sidebar
+    page = st.sidebar.radio("Choose a page", ["Voice Training", "Voice Cloning", "TTS Generation"])
 
     # Route to selected page
     if page == "Voice Training":
@@ -38,5 +60,3 @@ else:
         show_voice_cloning_page()
     elif page == "TTS Generation":
         show_tts_generation_page()
-    elif page == "Logout":
-        logout()
