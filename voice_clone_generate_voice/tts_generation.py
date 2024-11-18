@@ -7,7 +7,7 @@ API_KEY = "sk_54bb120d056452299fd2f6aa61cb6cdd5a115d8e16a02485"
 # List of default voices to hide
 default_voices_to_hide = [
     "Charlotte", "Aria", "Roger", "Sarah", "Laura", "Charlie", "George", 
-    "Callum", "River", "Liam", "Lily", "Bill", "Alice", "Matilda", "Will", 
+    "Callum", "River", "Liam", "Lily", "Bill", "Alice", "Matilda", "Will", "Ruhaan - Clean Hindi Narration Voice",
     "Jessica", "Eric", "Chris", "Brian", "Daniel", "Daniel", "Ruhaan - Clean narration voice", "Niraj - Hindi Narrator", "Niraj - Hindi Narrator"
 ]
 
