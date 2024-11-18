@@ -3,10 +3,6 @@ from voice_training import show_voice_training_page
 from voice_cloning import show_voice_cloning_page
 from tts_generation import show_tts_generation_page
 
-# Sidebar for page navigation
-st.sidebar.title("Voice Changer App")
-page = st.sidebar.radio("Choose a page", ["Voice Training", "Voice Cloning", "TTS Generation"])
-
 USERNAME = "apprikart"
 PASSWORD = "123" 
 
@@ -36,6 +32,10 @@ def login():
 def logout():
     st.session_state['authenticated'] = False
     st.success("You have been logged out! please click on logout button again.")
+
+# Sidebar for page navigation
+st.sidebar.title("Voice Changer App")
+page = st.sidebar.radio("Choose a page", ["Voice Training", "Voice Cloning", "TTS Generation"])
 
 # Route to selected page
 if page == "Voice Training":
