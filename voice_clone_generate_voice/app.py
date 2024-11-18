@@ -10,7 +10,7 @@ def login():
     login_button = st.button("Login")
 
     if login_button:
-        if username == "your_username" and password == "your_password":
+        if username == "leena" and password == "clone@20127":
             st.session_state.logged_in = True
             st.session_state.username = username
             st.success("Login successful!")
