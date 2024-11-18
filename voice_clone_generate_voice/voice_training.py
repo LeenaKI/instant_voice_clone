@@ -56,7 +56,7 @@ def show_voice_training_page():
                 st.success(f"Voice '{name}' successfully trained!")
                 
                 # Generate audio with the newly trained voice for demonstration
-                audio_generator = client.generate(text="यह क्लोन किया गया आवाज है।", voice=voice)
+                audio_generator = client.generate(text="This is a newwly cloned voice", voice=voice)
 
                 # Save the generated audio
                 output_directory = "generated_audio"
