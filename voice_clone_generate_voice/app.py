@@ -8,7 +8,7 @@ def login():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if username == "your_username" and password == "your_password":
+        if username == "lee" and password == "123":
             st.session_state.logged_in = True
             st.session_state.username = username
             st.success("Login successful!")
