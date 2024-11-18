@@ -1,3 +1,4 @@
 elevenlabs
 streamlit
+streamlit-authenticator
 pydub
