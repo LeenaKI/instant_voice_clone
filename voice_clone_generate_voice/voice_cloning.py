@@ -53,6 +53,7 @@ def clone_voice(mp3_path, voice_id):
             out_file.write(response.content)
         return output_path
     else:
+        print(f"Error {response.status_code}: {response.text}")  # More detailed error logging
         st.error("Failed to clone voice")
         return None
 
