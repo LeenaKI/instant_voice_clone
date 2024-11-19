@@ -26,7 +26,7 @@ def handle_file_upload():
     else:
         return [], []
 
-# Function to clone the voice using ElevenLabs API
+# Function to clone the voice using Eleven Labs API
 def train_voice(name, description, files):
     voice = client.clone(name=name, description=description, files=files)
     return voice
@@ -52,13 +52,6 @@ def show_voice_training_page():
         for uploaded_file in uploaded_files:
             st.audio(uploaded_file, format="audio/mp3")
 
-    # Stability and Similarity Controls
-    stability = st.slider("Set Stability (0.0 - 1.0)", min_value=0.0, max_value=1.0, step=0.1, value=0.5)
-    similarity = st.slider("Set Similarity Boost (0.0 - 1.0)", min_value=0.0, max_value=1.0, step=0.1, value=0.7)
-
-    # Optionally specify a model ID
-    model_id = st.text_input("Enter Model ID (Optional):", value="default")
-
     # If files are uploaded and fields are filled
     if name and description and uploaded_files:
         user_text = st.text_area(f"Enter text in {language}:")
@@ -70,13 +63,7 @@ def show_voice_training_page():
 
                 if user_text.strip():
                     # Generate audio with the newly trained voice
-                    audio_generator = client.generate(
-                        text=user_text,
-                        voice=voice,
-                        model=model_id,  # Pass the model ID
-                        stability=stability,  # Pass stability value
-                        similarity_boost=similarity  # Pass similarity boost value
-                    )
+                    audio_generator = client.generate(text=user_text, voice=voice)
 
                     # Save the generated audio
                     output_file_path = os.path.join(GENERATED_AUDIO_DIR, f"{name}_generated.mp3")
