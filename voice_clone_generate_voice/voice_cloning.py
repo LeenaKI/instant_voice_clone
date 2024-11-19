@@ -8,14 +8,14 @@ import json
 API_KEY = "sk_54bb120d056452299fd2f6aa61cb6cdd5a115d8e16a02485"  # Add your Eleven Labs API Key here
 AUDIO_DIR = "./audio_files"
 os.makedirs(AUDIO_DIR, exist_ok=True)
-stability = 0.1
-similarity_boost = 1.0
+stability = 0.2
+similarity_boost = 0.1
 
 # List of default voices to hide
 default_voices_to_hide = [
     "Charlotte", "Aria", "Roger", "Sarah", "Laura", "Charlie", "George", 
-    "Callum", "River", "Liam", "Lily", "Bill", "Alice", "Matilda", "Will", "Ruhaan - Clean Hindi Narration Voice",
-    "Jessica", "Eric", "Chris", "Brian", "Daniel", "Ruhaan - Clean narration voice", "Niraj - Hindi Narrator", "Niraj - Hindi Narrator"
+    "Callum", "River", "Liam", "Lily", "Bill", "Alice", "Matilda", "Will", 
+    "Jessica", "Eric", "Chris", "Brian", "Daniel"
 ]
 
 # Function to fetch available voices from Eleven Labs API
@@ -37,7 +37,7 @@ def clone_voice(mp3_path, voice_id):
     url = f"https://api.elevenlabs.io/v1/speech-to-speech/{voice_id}/stream"
     headers = {"xi-api-key": API_KEY}
     data = {
-        "model_id": "eleven_multilingual_v1",
+        "model_id": "eleven_english_sts_v2",
         "voice_settings": json.dumps({
             "stability": stability,
             "similarity_boost": similarity_boost,
@@ -53,11 +53,6 @@ def clone_voice(mp3_path, voice_id):
             out_file.write(response.content)
         return output_path
     else:
-        try:
-            error_details = response.json()  # Attempt to parse JSON response
-            print(f"Error {response.status_code}: {json.dumps(error_details, indent=2)}")
-        except ValueError:
-            print(f"Error {response.status_code}: {response.text}")  # Fallback to plain text if JSON parsing fails
         st.error("Failed to clone voice")
         return None
 
