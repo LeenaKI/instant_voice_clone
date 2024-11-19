@@ -6,9 +6,11 @@ from elevenlabs.client import ElevenLabs
 API_KEY = "sk_54bb120d056452299fd2f6aa61cb6cdd5a115d8e16a02485"
 client = ElevenLabs(api_key=API_KEY)
 
-# Create an audio directory if not present
+# Create directories for audio
 AUDIO_DIR = "audio_files"
+GENERATED_AUDIO_DIR = "generated_audio"
 os.makedirs(AUDIO_DIR, exist_ok=True)
+os.makedirs(GENERATED_AUDIO_DIR, exist_ok=True)
 
 # Function to upload multiple files
 def handle_file_upload():
@@ -34,6 +36,9 @@ def show_voice_training_page():
     st.title("Voice Training")
     st.write("Train a custom voice using your audio files.")
 
+    # Language selection
+    language = st.radio("Choose Language:", options=["English", "Hindi"])
+
     # User inputs for voice name and description
     name = st.text_input("Enter the voice name:")
     description = st.text_area("Enter a description for the voice:")
@@ -49,30 +54,33 @@ def show_voice_training_page():
 
     # If files are uploaded and fields are filled
     if name and description and uploaded_files:
-        if st.button("Train Voice"):
+        user_text = st.text_area(f"Enter text in {language}:")
+        if st.button("Train Voice and Generate Audio"):
             try:
                 # Train the voice by uploading the files
                 voice = train_voice(name, description, file_paths)
                 st.success(f"Voice '{name}' successfully trained!")
-                
-                # Generate audio with the newly trained voice for demonstration
-                audio_generator = client.generate(text="This is a newwly cloned voice", voice=voice)
 
-                # Save the generated audio
-                output_directory = "generated_audio"
-                os.makedirs(output_directory, exist_ok=True)
-                output_file_path = os.path.join(output_directory, f"{name}_generated.mp3")
+                if user_text.strip():
+                    # Generate audio with the newly trained voice
+                    audio_generator = client.generate(text=user_text, voice=voice)
 
-                # Write audio to file
-                with open(output_file_path, 'wb') as f:
-                    for chunk in audio_generator:
-                        f.write(chunk)
+                    # Save the generated audio
+                    output_file_path = os.path.join(GENERATED_AUDIO_DIR, f"{name}_generated.mp3")
+                    with open(output_file_path, 'wb') as f:
+                        for chunk in audio_generator:
+                            f.write(chunk)
 
-                # Show the generated audio file
-                st.write(f"Generated Audio with Cloned Voice:")
-                st.audio(output_file_path, format="audio/mp3")
-                st.success(f"Generated audio saved as {output_file_path}")
+                    # Show the generated audio file
+                    st.write("Generated Audio with Cloned Voice:")
+                    st.audio(output_file_path, format="audio/mp3")
+                    st.success(f"Generated audio saved as {output_file_path}")
+                else:
+                    st.error("Please enter text for audio generation.")
             except Exception as e:
-                st.error(f"Error in training the voice: {str(e)}")
+                st.error(f"Error in training the voice or generating audio: {str(e)}")
     else:
         st.warning("Please fill out the name, description, and upload at least one audio file.")
+
+# Show the page
+show_voice_training_page()
