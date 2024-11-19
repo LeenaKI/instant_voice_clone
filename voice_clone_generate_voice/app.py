@@ -27,7 +27,7 @@ if "logged_in" not in st.session_state or not st.session_state.logged_in:
     login()
 else:
     # If the user is logged in, show the app
-    st.title(f"Welcome {st.session_state.username}")
+    #st.title(f"Welcome {st.session_state.username}")
     
     # Sidebar for page navigation
     st.sidebar.title("Voice Changer App")
