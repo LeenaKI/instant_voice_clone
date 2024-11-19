@@ -53,7 +53,11 @@ def clone_voice(mp3_path, voice_id):
             out_file.write(response.content)
         return output_path
     else:
-        print(f"Error {response.status_code}: {response.text}")  # More detailed error logging
+        try:
+            error_details = response.json()  # Attempt to parse JSON response
+            print(f"Error {response.status_code}: {json.dumps(error_details, indent=2)}")
+        except ValueError:
+            print(f"Error {response.status_code}: {response.text}")  # Fallback to plain text if JSON parsing fails
         st.error("Failed to clone voice")
         return None
 
