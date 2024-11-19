@@ -37,7 +37,7 @@ def clone_voice(mp3_path, voice_id):
     url = f"https://api.elevenlabs.io/v1/speech-to-speech/{voice_id}/stream"
     headers = {"xi-api-key": API_KEY}
     data = {
-        "model_id": "eleven_multilingual_v2",
+        "model_id": "eleven_multilingual_v1",
         "voice_settings": json.dumps({
             "stability": stability,
             "similarity_boost": similarity_boost,
