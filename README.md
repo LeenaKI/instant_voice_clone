@@ -16,7 +16,6 @@ This **Instant Voice Changer App** allows users to train custom voices, clone ex
 1. Clone this repository:
    ```bash
    git clone https://github.com/LeenaKI/instant_voice_clone.git
-   cd voice-changer-app
    ```
 2. Install required dependencies:
    ```bash
