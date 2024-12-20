@@ -61,7 +61,7 @@ def show_voice_cloning_page():
     st.title("Voice Cloning")
     st.write("Upload an audio file to clone a voice.")
 
-    uploaded_file = st.file_uploader("Upload mp3 file(min. 2min)", type=["mp3"])
+    uploaded_file = st.file_uploader("Upload mp3 file(min. 1-2min)", type=["mp3"])
     if uploaded_file:
         # Save the uploaded file locally
         mp3_path = os.path.join(AUDIO_DIR, "input_audio.mp3")
