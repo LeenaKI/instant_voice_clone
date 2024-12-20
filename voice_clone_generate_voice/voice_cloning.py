@@ -61,7 +61,7 @@ def show_voice_cloning_page():
     st.title("Voice Cloning")
     st.write("Upload an audio file to clone a voice.")
 
-    uploaded_file = st.file_uploader("Upload mp3 file", type=["mp3"])
+    uploaded_file = st.file_uploader("Upload mp3 file(min. 2min)", type=["mp3"])
     if uploaded_file:
         # Save the uploaded file locally
         mp3_path = os.path.join(AUDIO_DIR, "input_audio.mp3")
@@ -81,7 +81,7 @@ def show_voice_cloning_page():
             
             # Display the voices in a dropdown for selection, excluding the default ones
             if filtered_voices:
-                voice_name = st.selectbox("Select voice for cloning", options=list(filtered_voices.keys()))
+                voice_name = st.selectbox("Select voice for cloning(trained voice in previous step)", options=list(filtered_voices.keys()))
                 voice_id = filtered_voices[voice_name]
 
                 if st.button("Clone Voice"):
