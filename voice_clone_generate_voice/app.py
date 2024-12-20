@@ -1,7 +1,7 @@
 import streamlit as st
 from voice_training import show_voice_training_page
 from voice_cloning import show_voice_cloning_page
-#from tts_generation import show_tts_generation_page
+from tts_generation import show_tts_generation_page
 
 # Function to handle login
 def login():
@@ -23,7 +23,7 @@ def logout():
 
 # Check if the user is logged in
 if "logged_in" not in st.session_state or not st.session_state.logged_in:
-    st.title("Login Page")
+    st.title("Seamless Voice Replication")
     login()
 else:
     # If the user is logged in, show the app
@@ -38,7 +38,7 @@ else:
         show_voice_training_page()
     elif page == "Voice Cloning":
         show_voice_cloning_page()
-    #elif page == "TTS Generation":
-        #show_tts_generation_page()
+    elif page == "TTS Generation":
+        show_tts_generation_page()
     elif page == "Logout":
         logout()
