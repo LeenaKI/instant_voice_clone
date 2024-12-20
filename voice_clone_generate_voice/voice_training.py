@@ -14,7 +14,7 @@ os.makedirs(GENERATED_AUDIO_DIR, exist_ok=True)
 
 # Function to upload multiple files
 def handle_file_upload():
-    uploaded_files = st.file_uploader("Upload Audio Files for training voice(Multiple Allowed)", type=["mp3", "wav"], accept_multiple_files=True)
+    uploaded_files = st.file_uploader("Upload Audio Files for training voice min. 30sec-1min(Multiple Allowed)", type=["mp3", "wav"], accept_multiple_files=True)
     if uploaded_files:
         file_paths = []
         for file in uploaded_files:
