@@ -1,6 +1,0 @@
-
-
-app.py
-voice_training.py
-voice_cloning.py
-tts_generation.py
