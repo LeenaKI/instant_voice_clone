@@ -1,7 +1,7 @@
 # Instant Voice Changer App
 
 ### Demo Link in Streamlit application
-https://instantvoiceclone-bk9sstdkgxbtyescemjx54.streamlit.app/
+
 
 This **Instant Voice Changer App** allows users to train custom voices, clone existing voices, and generate text-to-speech (TTS) audio using the **Eleven Labs API**. The app provides a secure login system and an intuitive interface for exploring its features.
 
@@ -30,7 +30,7 @@ This **Instant Voice Changer App** allows users to train custom voices, clone ex
    streamlit run app.py
    ```
 5. Open the app in your browser and log in with:
-   - **Username**: `leena`  
+   - **Username**: `amiga`  
    - **Password**: `clone@20127`  
 
 6. Use the sidebar to navigate between **Voice Training**, **Voice Cloning**, and **Logout**.
